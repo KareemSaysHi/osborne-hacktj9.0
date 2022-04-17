@@ -23,7 +23,7 @@ class Solver():
             return False
 
     def readFile(self):
-        with open('osborne-hacktj9.0\heptacubes.txt', 'r') as f:
+        with open('osborne-hacktj9.0\hexacubes.txt', 'r') as f:
             heptacubesList = f.readlines()
             for heptacube in heptacubesList:
                 helperArray = []
