@@ -6,16 +6,21 @@ class Solver():
         self.picnicbasket = [[[1, 1, 1, 1, 1], [1, 1, 1, 1, 1], [1, 1, 1, 1, 1], [1, 1, 1, 1, 1], [1, 1, 1, 1, 1]], [[1, 1, 1, 1, 1], [1, 0, 0, 0, 1], [1, 0, 0, 0, 1], [1, 0, 0, 0, 1], [1, 1, 1, 1, 1]], [[1, 1, 1, 1, 1], [1, 0, 0, 0, 1], [1, 0, 0, 0, 1], [1, 0, 0, 0, 1], [1, 1, 1, 1, 1]], [[1, 1, 1, 1, 1], [1, 0, 0, 0, 1], [1, 0, 0, 0, 1], [1, 0, 0, 0, 1], [1, 1, 1, 1, 1]], [[0, 0, 1, 0, 0], [0, 0, 0, 0, 0], [0, 0, 0, 0, 0], [0, 0, 0, 0, 0], [0, 0, 1, 0, 0]], [[0, 0, 1, 0, 0], [0, 0, 1, 0, 0], [0, 0, 1, 0, 0], [0, 0, 1, 0, 0], [0, 0, 1, 0, 0]]] #just trust me this is a picnicbasket
 
 
-    def pieceToPieceInBasket(self, piece):
-        pieceInBasket = np.zeros(9, 9, 9)
-        for i in range (1, 1+np.size(piece, 0)): #z
-            for j in range (3, 3+np.size(piece, 1)): #y
-                for k in range (3, 3+np.size(piece, 2)): #x
-                    pieceInBasket[i][j][k] = piece[i-1][j-3][k-3]
-
-    def isOverlappingWithBasket(self, pieceInBasket):
-        if np.array_equal(np.logical_and(pieceInBasket, self.picnicbasket),
-        ) 
+    def isOverlapping(self, piece, location):
+        pieceInBasket = np.zeros((6, 5, 5)) #put a piece in basket
+        for i in range (location[0], location[0]+np.size(piece, 0)): #z
+            for j in range (location[1], location[1]+np.size(piece, 1)): #y
+                for k in range (location[2], location[2]+np.size(piece, 2)): #x
+                    if (i < 6 and j < 5 and k < 5):
+                        pieceInBasket[i][j][k] = piece[i-location[0]][j-location[1]][k-location[2]]
+        
+        #check if piece is overlapping with basket:
+        sumArray = np.add(pieceInBasket, self.picnicbasket)
+        #print(sumArray)
+        if np.size(np.where(sumArray.flatten() == 2)) > 0:
+            return True
+        else:
+            return False
 
     def readFile(self):
         with open('osborne-hacktj9.0\heptacubes.txt', 'r') as f:
@@ -72,12 +77,48 @@ class Solver():
         return newlist
 
 
-    def canPieceGetOutOfBasket(piece):
+    def canPieceGetOutOfBasket(self, piece, location):
+        if location[0] > 5:
+            return True
 
+        location[0] += 1
+        if not self.isOverlapping(piece, location):
+            return self.canPieceGetOutOfBasket(piece, location)
+        location[0] -= 1
+        
+        while not self.isOverlapping(piece, location):
+            location[1] -= 1
+            if location [1] < -1:
+                return True
+
+        while not self.isOverlapping(piece, location):
+            location[2] -= 1
+            if location [2] < -1:
+                return True
+
+        counter = 0
+        while not self.isOverlapping(piece, location):
+            while not self.isOverlapping(piece, location):
+                location[0] += 1
+                if not self.isOverlapping(piece, location):
+                    return self.canPieceGetOutOfBasket(piece, location)
+                location[0] -= 1
+
+                location[1] += 1
+                counter += 1
+                if location[1] > 6:
+                    return True
             
+            location[1] -= counter
+            location[2] += 1
+            if location[2] > 6:
+                return True
+
+        return False
 
     def getHeptacubes(self):
         self.readFile()
-        newlist = self.removePadding()
-        self.heptacubes = newlist
-        return newlist
+        #newlist = self.removePadding()
+        #self.heptacubes = newlist
+        
+        return self.heptacubes #should be newlist

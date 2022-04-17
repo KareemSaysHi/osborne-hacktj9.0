@@ -27,13 +27,11 @@ class PieceDisplay():
                 if counter < 0: #wrap the counter around
                     counter += len(self.pieces)
                 update = True
-                time.sleep(0.2)
             elif keyboard.is_pressed('right'):
                 counter += 1
                 if counter >= len(self.pieces): #wrap the counter around
                     counter -= len(self.pieces)
                 update = True
-                time.sleep(0.2)
             
             if update:
                 piece_matrix = self.pieces[counter]

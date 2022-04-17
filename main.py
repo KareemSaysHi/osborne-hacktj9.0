@@ -10,15 +10,22 @@ class PuzzleSolver():
     def showPieces(self):
         solver = Solver()
         heptacubes = solver.getHeptacubes()
-        display = PieceDisplay(heptacubes)
+        usableHeptacubes = []
+        for heptacube in heptacubes:
+            if solver.canPieceGetOutOfBasket(heptacube, [1, 1, 1]):
+                usableHeptacubes.append(heptacube)
+
+        print(usableHeptacubes)
+        with open('usableHeptacubes.txt', 'w') as f:
+            for h in usableHeptacubes:
+                f.write(''.join(str(h.reshape(27))) + '\n')
+
+        display = PieceDisplay(usableHeptacubes)
         display.displayPieces()
 
     def outputToSCAD(self):
         openscad = OpenSCAD()
         openscad.writeSCAD()
-
-
-        
 
 if __name__ == "__main__":
     puzzleSolver = PuzzleSolver()
