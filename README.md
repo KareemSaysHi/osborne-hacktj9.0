@@ -1,7 +1,9 @@
 # Procedureal Picnic Puzzle Production!
 ## Our HackTJ 9.0 Project, by team Osborne Study Hall
 
-Here is our progress at a web application to procedurally generate linear packing puzzles and automatically produce an stl for convenient 3D printing!  Current features include:
+Inspired by our love for puzzles and the [https://www.thingiverse.com/akaki/collections/akakis-picnic-basket-packing-puzzle-series](Akaki's picnic) packing puzzle series, here is our progress at a web application to procedurally generate linear packing puzzles and automatically produce an stl for convenient 3D printing!  Our project aims to take in parameters such as difficulty and size of a puzzle, and generate a unique picnic basket packing puzzle in response.
+
+Current features include:
 
 - generating and visualizing all possible heptacubes (a contigenous shape formed by 7 1x1x1 cuboids), of which there are 10941 (our algorithm can be used to find higher orders of polyominos too, allowing us to expand on our project easily)
 - reducing this set of heptacubes (and lower order polycubes) to the subset which are able to be linearly removed from our picnic basket packing puzzle, of which there are 211
