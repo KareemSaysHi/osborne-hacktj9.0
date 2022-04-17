@@ -1,6 +1,8 @@
 # Procedureal Picnic Puzzle Production!
 ## Our HackTJ 9.0 Project, by team Osborne Study Hall
 ![277702768_1155352118613303_1219196194316416713_n](https://user-images.githubusercontent.com/45048520/163713383-5f94992b-2aea-44f2-b8f0-469b4d717aa5.png)
+![278161643_767876527740312_4944431619925473028_n](https://user-images.githubusercontent.com/45048520/163713433-8675b50f-494c-4503-a31f-84bf3ff0c394.png)
+
 Inspired by our love for puzzles and the [Akaki's Picnic](https://www.thingiverse.com/akaki/collections/akakis-picnic-basket-packing-puzzle-serie) packing puzzle series, here is our progress at a web application to procedurally generate linear packing puzzles and automatically produce an stl for convenient 3D printing!  Our project aims to take in parameters such as difficulty and size of a puzzle, and generate a unique picnic basket packing puzzle in response.  To get an idea of what these puzzles look like, check out [these videos](https://youtube.com/playlist?list=PLhoVTbjnRHWkcRfY_PQeYTZDrkUQBRits) of a couple that our team members designed.
 
 Current features include:
